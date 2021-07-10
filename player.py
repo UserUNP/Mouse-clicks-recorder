@@ -11,8 +11,13 @@ def play(proc):
             line = l.replace("\n", "")
             i += 1
             if i%2 != 0:
-                print(f"WAITING FOR {str(int(float(l)))} SECONDS")
-                time.sleep(int(float(line)))
+                if float(line) <= 0.0001:
+                    wait = line
+                else:
+                    wait = line[:-13]
+                    wait = str(int(float(wait))+0.0002)
+                print(f"WAITING FOR {wait} SECONDS")
+                time.sleep(float(wait))
             elif i%2 == 0 and len(line.split(" ")) == 3 or 4:
                 x = int(line.split(" ")[0])
                 y = int(line.split(" ")[1])
